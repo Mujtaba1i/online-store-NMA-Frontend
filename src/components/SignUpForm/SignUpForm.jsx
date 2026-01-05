@@ -11,29 +11,35 @@ function SignUpForm() {
     username: '',
     password: '',
     confirmPassword: '',
+    wantToBeSeller:false
   })
 
-    const { username, password, confirmPassword } = formData;
+    const { username, password, confirmPassword, wantToBeSeller } = formData;
     
     function handleChange(event){
-        setFormData({...formData,[event.target.name]:event.target.value})
-        
+        const newValue = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+        setFormData({...formData,[event.target.name]:newValue})
     }
     
     async function handleSubmit (event){
         event.preventDefault()
-        delete formData.confirmPassword
-        const response = await signUp(formData)
+        const { confirmPassword: _, ...submitData } = formData;
+        const response = await signUp(submitData)
         if (response){
             setUser(response)
             navigate('/')
         }
+        else if (response === null){
+         navigate('/')   
+        }
+            
         else{
             console.log('Ran into an error');
             setFormData({
                 username: '',
                 password: '',
                 confirmPassword: '',
+                wantToBeSeller: false
             })
         }
         
@@ -53,6 +59,9 @@ function SignUpForm() {
 
             <label htmlFor="confirm-password">confirm password: </label>
             <input name="confirmPassword" id="confirm-password" type="password" onChange={handleChange} value={confirmPassword}/><br /><br />
+            
+            <label htmlFor="wantToBeSeller">Want to be Signup as Store?  </label>
+            <input name="wantToBeSeller" id="wantToBeSeller" type="checkbox" onChange={handleChange} checked={wantToBeSeller}/><br /><br />
             
             <button disabled={isFormInvalid()}>Sign Up</button><br /><br />
             <button onClick={() => navigate('/')}>Cancel</button>
