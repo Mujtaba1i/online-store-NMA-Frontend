@@ -1,16 +1,34 @@
-import {Link} from 'react-router'
-import styles from './Navbar.module.css'
+import { Link } from 'react-router'
+import { UserContext } from '../../contexts/UserContext'
+import { useContext } from 'react'
 
+function NavBar() {
+  const {user,setUser} = useContext(UserContext)
 
-function Navbar() {
+  function logout(){
+    localStorage.removeItem('token')
+    setUser(null)
+  }
+  
+
   return (
-    <div>
-        <Link to='/' >Homepage</Link> {' | '}
-        <Link to='/Sign-up' >Sign-up</Link> {' | '}
-        <Link to='/Sign-in' >Sign-in</Link> {' | '}
-
-    </div>
+    <nav>
+      <ul>
+        {user ? 
+        <>
+        <p>Welcome {user.username}!</p> 
+        <button onClick={logout}>Sign-out</button>
+        </>
+        :
+        <>
+        <li><Link to='/Sign-up'>Sign-Up</Link></li>
+        <li><Link to='/Sign-in'>Sign-In</Link></li>
+        </>
+        }
+        
+      </ul>
+    </nav>
   )
 }
 
-export default Navbar
+export default NavBar

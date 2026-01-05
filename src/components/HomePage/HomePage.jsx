@@ -1,13 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router'
-import styles from './HomePage.module.css'
 
-function HomePage() {
+function Homepage() {
   return (
-    <div>
-        HomePage
-    </div>
+    <div>Homepage</div>
   )
 }
 
-export default HomePage
+export default Homepage
