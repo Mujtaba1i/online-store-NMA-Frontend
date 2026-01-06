@@ -1,0 +1,34 @@
+import { useState, useEffect } from 'react'
+import * as productService from "../../services/productService"
+import { useParams, Link, useNavigate } from 'react-router'
+
+function productDetail() {
+    const [product, setProduct] = useState({})
+    const { id } = useParams()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const getOneProduct = async (id) => {
+            try {
+                const data = await productService.show(id)
+                setProduct(data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        if(id) getOneProduct(id)
+    }, [id])
+    return (
+       <>
+       <h1>Product Details</h1>
+       <h3>Product: {product.name}</h3>
+       <p>Description: {product.description}</p>
+       <p>Price: {product.price}</p>
+       <p>Stock: {product.stock}</p>
+       <img src={product.imageLink} alt="productImage" />
+       </>
+    )
+}
+
+export default productDetail

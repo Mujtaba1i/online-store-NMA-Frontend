@@ -5,6 +5,8 @@ import { UserContext } from "./contexts/UserContext"
 import { useContext,useState, useEffect  } from 'react'
 import SignInForm from "./components/SignInForm/SignInForm"
 import ProductList from "./components/productList/productList"
+import ProductDetail from "./components/productDetail/productDetail"
+
 
 function App() {
   const {user} = useContext(UserContext)
@@ -18,7 +20,7 @@ function App() {
         <Route path="/" element={<ProductList/>}/>
         <Route path="/Sign-up" element={<SignUpForm/>}/>
         <Route path="/Sign-in" element={<SignInForm/>}/>
-        <Route path="/products/:id" element/>
+        <Route path="/products/:id" element={<ProductDetail/>}/>
       </Routes>
     </div>
     </>

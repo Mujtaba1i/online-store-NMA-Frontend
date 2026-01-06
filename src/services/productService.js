@@ -11,7 +11,16 @@ const index = async () => {
         console.log(err)
     }
 }
-
+const show = async (id) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/${id}`)
+        return response.data.product
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
 export {
-    index
+    index,
+    show
 }
