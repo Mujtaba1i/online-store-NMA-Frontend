@@ -6,9 +6,10 @@ import { useContext, useState, useEffect } from 'react'
 import SignInForm from './components/SignInForm/SignInForm'
 import ProductList from './components/productList/productList'
 import ProductDetail from './components/productDetail/productDetail'
-import Admin from './components/Admin/Admin'
 import OrderList from './components/OrderList/OrderList'
 import OrderDetails from './components/OrderDetails/OrderDetails'
+import AdminDashboard from "./components/Admin/Admin"
+import SellerDashboard from "./components/SellerDashboard/SellerDashboard"
 
 function App() {
   const { user } = useContext(UserContext)
@@ -20,12 +21,13 @@ function App() {
         <h1>MAMAMIA!! {user ? ', ' + user.role + ' ' + user.username : ''}</h1>
         <Routes>
           <Route path="/" element={<ProductList />} />
-          <Route path="/admin" element={<Admin />} />
           <Route path="/Sign-up" element={<SignUpForm />} />
           <Route path="/Sign-in" element={<SignInForm />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/orders" element={<OrderList />} />
           <Route path="/orders/:id" element={<OrderDetails />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
+          <Route path="/seller-dashboard" element={<SellerDashboard/>}/>
         </Routes>
       </div>
     </>
