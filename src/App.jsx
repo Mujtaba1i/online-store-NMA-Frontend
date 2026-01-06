@@ -5,6 +5,7 @@ import { UserContext } from "./contexts/UserContext"
 import { useContext,useState, useEffect  } from 'react'
 import SignInForm from "./components/SignInForm/SignInForm"
 import ProductList from "./components/productList/productList"
+import ProductDetail from "./components/productDetail/productDetail"
 import Admin from "./components/Admin/Admin"
 
 function App() {
@@ -14,13 +15,13 @@ function App() {
     <>
     <div>
       <NavBar/> 
-      <h1>MAMAMIA!! {user ? ', '+user.role + ' ' +user.username : ''}</h1> 
+      <h1>MAMAMIA!! {user ? ', ' + user.role + ' ' + user.username : ''}</h1> 
       <Routes>
         <Route path="/" element={<ProductList/>}/>
         <Route path="/admin" element={<Admin/>}/>
         <Route path="/Sign-up" element={<SignUpForm/>}/>
         <Route path="/Sign-in" element={<SignInForm/>}/>
-        <Route path="/products/:id" element/>
+        <Route path="/products/:id" element={<ProductDetail/>}/>
       </Routes>
     </div>
     </>
