@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
-import { signUp } from "../../services/authService";
+import { signUp } from "../../../services/authService";
 import { useNavigate } from "react-router";
-import { UserContext } from "../../contexts/UserContext";
+import { UserContext } from "../../../contexts/UserContext";
 
 function SignUpForm() {
     const navigate = useNavigate()

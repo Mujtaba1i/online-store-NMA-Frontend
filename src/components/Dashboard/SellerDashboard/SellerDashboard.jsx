@@ -1,5 +1,5 @@
 import { Navigate, useNavigate } from "react-router"
-import { UserContext } from "../../contexts/UserContext"
+import { UserContext } from "../../../contexts/UserContext"
 import { useContext } from 'react'
 
 function SellerDashboard() {

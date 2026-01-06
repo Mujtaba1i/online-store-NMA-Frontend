@@ -1,7 +1,7 @@
 import { useNavigate, Navigate } from "react-router"
-import { UserContext } from "../../contexts/UserContext"
+import { UserContext } from "../../../contexts/UserContext"
 import { useContext, useEffect, useState } from 'react'
-import * as userService from "../../services/userService"
+import * as userService from "../../../services/userService"
 
 function Admin() {
 

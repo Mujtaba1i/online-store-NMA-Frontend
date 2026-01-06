@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import * as orderService from '../../services/orderService.js'
+import * as orderService from '../../../services/orderService.js'
 import { useParams } from 'react-router'
 
 const OrderDetails = () => {
