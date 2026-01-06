@@ -8,8 +8,8 @@ async function signUp (formData){
         const data = res.data
         const token = data.token
         
-        console.log(formData)
-        if (formData.store === false) 
+        console.log(formData.wantToBeSeller)
+        if (formData.wantToBeSeller === false) 
         { 
             localStorage.setItem('token', token)
             const encodedPayload = token.split('.')[1]
