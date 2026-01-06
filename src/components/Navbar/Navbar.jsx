@@ -1,11 +1,14 @@
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { useContext } from 'react'
 
 function NavBar() {
   const {user,setUser} = useContext(UserContext)
 
+  const navigate = useNavigate()
+
   function logout(){
+    navigate('/')
     localStorage.removeItem('token')
     setUser(null)
   }
