@@ -9,7 +9,6 @@ const OrderList = () => {
     const getAllOrders = async () => {
       try {
         const data = await orderService.index()
-        console.log(data)
         setOrders(data)
       } catch (error) {
         console.error(error)
