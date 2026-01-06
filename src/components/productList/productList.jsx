@@ -23,7 +23,8 @@ const productList = () => {
 
     return (
         <>  
-            {user ?  user.role === 'admin' &&  <Link to='/admin'>Admin</Link> : <></>}
+            {user ?  user.role === 'admin' &&  <Link to='/admin-dashboard'>Admin Dashboard</Link> : <></>}
+            {user ?  user.role === 'seller' &&  <Link to='/seller-dashboard'>Your Dashboard</Link> : <></>}
             <h1>Product List</h1>
             {
                 !products.length ?
