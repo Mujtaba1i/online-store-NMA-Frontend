@@ -38,7 +38,7 @@ function SignInForm() {
 
   return (
     <div>
-        <h1>Signup</h1>
+        <h1>Signin</h1>
         <form onSubmit={handleSubmit}>
             <label htmlFor="username">Username: </label>
             <input name="username" id="username" type="text" onChange={handleChange} value={username}/><br /><br />
