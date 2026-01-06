@@ -1,7 +1,7 @@
 import { useEffect, useState,useContext } from "react"
 import { Link } from "react-router"
-import { UserContext } from "../../contexts/UserContext"
-import * as productService from "../../services/productService"
+import { UserContext } from "../../../contexts/UserContext"
+import * as productService from "../../../services/productService"
 
 const productList = () => {
     const {user} = useContext(UserContext)

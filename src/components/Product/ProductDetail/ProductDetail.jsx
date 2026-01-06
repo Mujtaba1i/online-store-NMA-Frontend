@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import * as productService from "../../services/productService"
+import * as productService from "../../../services/productService"
 import { useParams, Link, useNavigate } from 'react-router'
 
 function productDetail() {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import * as productService from "../../services/productService"
+import * as productService from "../../../services/productService"
 import { useNavigate, useParams } from 'react-router'
 
 const ProductForm = () => {

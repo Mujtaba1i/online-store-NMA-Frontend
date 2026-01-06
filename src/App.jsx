@@ -1,16 +1,16 @@
-import NavBar from './components/NavBar/NavBar'
-import SignUpForm from './components/SignUpForm/SignUpForm'
+import { useContext, useState, useEffect } from 'react'
 import { Route, Routes, Link } from 'react-router'
 import { UserContext } from './contexts/UserContext'
-import { useContext, useState, useEffect } from 'react'
-import SignInForm from './components/SignInForm/SignInForm'
-import ProductList from './components/productList/productList'
-import ProductDetail from './components/productDetail/productDetail'
-import ProductForm from "./components/ProductForm/ProductForm"
-import OrderList from './components/OrderList/OrderList'
-import OrderDetails from './components/OrderDetails/OrderDetails'
-import AdminDashboard from "./components/Admin/Admin"
-import SellerDashboard from "./components/SellerDashboard/SellerDashboard"
+import NavBar from './components/NavBar/NavBar'
+import SignUpForm from './components/Auth/SignUpForm/SignUpForm'
+import SignInForm from './components/Auth/SignInForm/SignInForm'
+import ProductList from './components/Product/ProductList/ProductList'
+import ProductDetail from './components/Product/ProductDetail/ProductDetail'
+import ProductForm from "./components/Product/CreateProductForm/CreateProductForm"
+import OrderList from './components/Order/OrderList/OrderList'
+import OrderDetails from './components/Order/OrderDetails/OrderDetails'
+import AdminDashboard from "./components/Dashboard/AdminDashboard/AdminDashboard"
+import SellerDashboard from "./components/Dashboard/SellerDashboard/SellerDashboard"
 
 function App() {
   const { user } = useContext(UserContext)
