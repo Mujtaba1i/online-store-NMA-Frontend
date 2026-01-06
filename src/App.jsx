@@ -7,6 +7,7 @@ import SignInForm from "./components/SignInForm/SignInForm"
 import ProductList from "./components/productList/productList"
 import ProductDetail from "./components/productDetail/productDetail"
 import Admin from "./components/Admin/Admin"
+import ProductForm from "./components/ProductForm/ProductForm"
 
 function App() {
   const {user} = useContext(UserContext)
@@ -21,6 +22,7 @@ function App() {
         <Route path="/admin" element={<Admin/>}/>
         <Route path="/Sign-up" element={<SignUpForm/>}/>
         <Route path="/Sign-in" element={<SignInForm/>}/>
+        <Route path="/products/new" element={<ProductForm/>}/>
         <Route path="/products/:id" element={<ProductDetail/>}/>
       </Routes>
     </div>

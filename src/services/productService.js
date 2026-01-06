@@ -20,7 +20,18 @@ const show = async (id) => {
         console.log(err)
     }
 }
+const create = async (formData)=> {
+  try{
+    const token = localStorage.getItem('token')
+    const response = await axios.post(BASE_URL, formData,{headers:{Authorization: `Bearer ${token}`}})
+    console.log(response.data)
+    return response.data
+  }catch(error){
+    console.log(error)
+  }
+}
 export {
     index,
-    show
+    show,
+    create
 }
