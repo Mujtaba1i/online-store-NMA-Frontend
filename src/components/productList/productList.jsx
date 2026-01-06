@@ -1,26 +1,29 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState,useContext } from "react"
 import { Link } from "react-router"
+import { UserContext } from "../../contexts/UserContext"
 import * as productService from "../../services/productService"
 
 const productList = () => {
+    const {user} = useContext(UserContext)
     const [products, setProducts] = useState([])
   
-
-    useEffect(() => {
-        const getAllProducts = async () => {
+    const getAllProducts = async () => {
             try{
                 const data = await productService.index()
-                // console.log(data)
                 setProducts(data)
             }
             catch(err){
                 console.log(err)
             }
         }
+
+    useEffect(() => {
         getAllProducts()
     },[])
+
     return (
-        <>
+        <>  
+            {user ?  user.role === 'admin' &&  <Link to='/admin'>Admin</Link> : <></>}
             <h1>Product List</h1>
             {
                 !products.length ?
