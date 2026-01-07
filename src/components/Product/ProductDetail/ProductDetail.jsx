@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import * as productService from "../../../services/productService"
 import { useParams, Link, useNavigate } from 'react-router'
+import {UserContext} from '../../../contexts/UserContext.jsx';
 
 function productDetail() {
     const [product, setProduct] = useState({})
     const { id } = useParams()
     const navigate = useNavigate()
+    const { handleAddToCart} = useContext(UserContext)
 
     useEffect(() => {
         const getOneProduct = async (id) => {
@@ -42,6 +44,7 @@ function productDetail() {
             <p>Stock: {product.stock}</p>
             <img src={product.imageLink} alt="productImage" />
             <br />
+            <button onClick={() => handleAddToCart(id)}>Add to cart</button>
             <Link to={`/products/${id}/edit`}>
             <button>Edit</button>
             </Link>
