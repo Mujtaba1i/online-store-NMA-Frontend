@@ -1,9 +1,11 @@
 import { Link, useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import { useContext } from 'react'
+import { CartContext } from "../../contexts/CartContext"
 
 function NavBar() {
   const {user,setUser} = useContext(UserContext)
+  // const {cart,setCart} = useContext(CartContext)
 
   const navigate = useNavigate()
 
@@ -21,6 +23,9 @@ function NavBar() {
         <>
         <p>Welcome {user.username}!</p> 
         <button onClick={logout}>Sign-out</button>
+        {user ?  user.role === 'admin' &&  <Link to='/admin-dashboard'>Admin Dashboard</Link> : <></>}
+        {user ?  user.role === 'seller' &&  <Link to='/seller-dashboard'>Seller Dashboard</Link> : <></>}
+        {user ?  user.role === 'customer' &&  <p>Number of items in cart: {user.cart.length} </p> : <></>}
         </>
         :
         <>
