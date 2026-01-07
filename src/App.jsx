@@ -7,6 +7,7 @@ import SignInForm from './components/Auth/SignInForm/SignInForm'
 import ProductList from './components/Product/ProductList/ProductList'
 import ProductDetail from './components/Product/ProductDetail/ProductDetail'
 import ProductForm from "./components/Product/CreateProductForm/CreateProductForm"
+import EditProductForm from './components/Product/EditProductForm/EditProductForm'
 import OrderList from './components/Order/OrderList/OrderList'
 import OrderDetails from './components/Order/OrderDetails/OrderDetails'
 import AdminDashboard from "./components/Dashboard/AdminDashboard/AdminDashboard"
@@ -26,6 +27,7 @@ function App() {
           <Route path="/Sign-in" element={<SignInForm />} />
           <Route path="/products/new" element={<ProductForm/>}/>
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/products/:id/edit" element={<EditProductForm />} />
           <Route path="/orders" element={<OrderList />} />
           <Route path="/orders/:id" element={<OrderDetails />} />
           <Route path="/admin-dashboard" element={<AdminDashboard/>}/>

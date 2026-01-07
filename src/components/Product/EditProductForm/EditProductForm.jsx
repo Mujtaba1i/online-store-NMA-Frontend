@@ -1,44 +1,53 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as productService from "../../../services/productService"
 import { useNavigate, useParams } from 'react-router'
 
-const ProductForm = () => {
+function EditProductForm() {
     const navigate = useNavigate()
-    const [formState, setFormState] = useState({
-        name:'',
-        description: '',
-        price:0,
-        stock:0,
-        imageLink:''
-    })
-    const [message, setMessage] = useState('')
+    const { id } = useParams()
+    const [formState, setFormState] = useState({})
+    const [message, setMessage] =useState(" ")
+
+    useEffect(
+        () => {
+            const getOneProduct = async (id) => {
+                const product = await productService.show(id)
+                setFormState(product)
+            }
+
+            if (id) getOneProduct(id)
+        }, [id]
+    )
+
+    if (!id) return <h1>Loading...</h1>
+    if (!formState) return <h1>Loading..</h1>
 
     const handleChange = (evt) => {
         const { name, value } = evt.target
         const newFormState = { ...formState, [name]: value }
         setFormState(newFormState)
     }
-
     const handleSubmit = async (evt) => {
         evt.preventDefault()
-
         try {
-            setMessage(" ")
-
-            const payload = {...formState}
+            const payload = { ...formState }
             payload.price = Number(payload.price)
             payload.stock = Number(payload.stock)
 
-            const newProduct = await productService.create(formState)
-            navigate("/")
-        } catch (error) {
+            const updatedProduct = await productService.update(id, payload)
+
+            if(updatedProduct){
+                navigate("/")
+            }
+        } 
+        catch (error) {
             console.log(error)
             setMessage("Something went wrong")
         }
     }
     return (
         <>
-            <h1>Create new Product</h1>
+            <h1>Edit {formState.name}</h1>
             <p>{message}</p>
             <form onSubmit={handleSubmit}>
 
@@ -57,10 +66,10 @@ const ProductForm = () => {
                 <label htmlFor="imageLink">Product Image: </label>
                 <input type="text" id='imageLink' name='imageLink' value={formState.imageLink} onChange={handleChange} />
 
-                <button>Create</button>
+                <button>Edit</button>
             </form>
         </>
     )
 }
 
-export default ProductForm
+export default EditProductForm
