@@ -33,7 +33,6 @@ function productDetail() {
     }
 
     if (!id) return <h1>Loading...</h1>
-    // if () return <h1>Loading..</h1>
 
     return (
         <>
@@ -44,15 +43,14 @@ function productDetail() {
             <p>Stock: {product.stock}</p>
             <img src={product.imageLink} alt="productImage" />
             <br />
-            {user.role === 'customer' && <button onClick={() => handleAddToCart(id)}>Add to cart</button>
-}
+            {user === null ? <></> :(user.role === 'customer' && <button onClick={() => handleAddToCart(id)}>Add to cart</button>)}
             <br />
-            {(user.role === "admin" || product.user == user._id) && (<>
+            {user === null ? <></> :((user.role === "admin" || product.user == user._id) && (<>
             <Link to={`/products/${id}/edit`}>
             <button>Edit</button>
             </Link>
             <br />
-            <button onClick={handleDelete}>Delete</button></>)}
+            <button onClick={handleDelete}>Delete</button></>))}
             
         </>
     )
