@@ -30,8 +30,26 @@ const create = async (formData)=> {
     console.log(error)
   }
 }
+const update = async (productId, formData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/${productId}`, formData)
+    return response.data.product
+  } catch (error) {
+    console.log(error)
+  }
+}
+const deleteOne = async (productId) => {
+  try{
+    const response = await axios.delete(`${BASE_URL}/${productId}`)
+    return response.data.product
+  }catch(error){
+    console.log(error)
+  }
+}
 export {
     index,
     show,
-    create
+    create,
+    update,
+    deleteOne
 }
