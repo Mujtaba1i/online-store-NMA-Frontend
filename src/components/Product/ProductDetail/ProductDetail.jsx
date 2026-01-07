@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from 'react'
 import * as productService from "../../../services/productService"
 import { useParams, Link, useNavigate } from 'react-router'
-import {UserContext} from '../../../contexts/UserContext.jsx';
+import { UserContext } from '../../../contexts/UserContext.jsx';
 
 function productDetail() {
     const [product, setProduct] = useState({})
     const { id } = useParams()
     const navigate = useNavigate()
-    const { handleAddToCart} = useContext(UserContext)
+    const { user,setUser,handleAddToCart } = useContext(UserContext)
 
     useEffect(() => {
         const getOneProduct = async (id) => {
@@ -44,12 +44,16 @@ function productDetail() {
             <p>Stock: {product.stock}</p>
             <img src={product.imageLink} alt="productImage" />
             <br />
-            <button onClick={() => handleAddToCart(id)}>Add to cart</button>
+            {user.role === 'customer' && <button onClick={() => handleAddToCart(id)}>Add to cart</button>
+}
+            <br />
+            {(user.role === "admin" || product.user == user._id) && (<>
             <Link to={`/products/${id}/edit`}>
             <button>Edit</button>
             </Link>
             <br />
-            <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleDelete}>Delete</button></>)}
+            
         </>
     )
 }
