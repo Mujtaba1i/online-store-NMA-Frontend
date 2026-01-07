@@ -1,10 +1,11 @@
 import axios from "axios"
+import { authHeaders } from "./authService"
 const BASE_URL = `${import.meta.env.VITE_API_URL}/products`
+
 
 const index = async () => {
     try {
         const response = await axios.get(BASE_URL)
-        // console.log(response.data)
         return response.data.products
     }
     catch (err) {
@@ -13,7 +14,10 @@ const index = async () => {
 }
 const show = async (id) => {
     try {
-        const response = await axios.get(`${BASE_URL}/${id}`)
+        const response = await axios.get(
+          `${BASE_URL}/${id}`,
+          authHeaders()
+        )
         return response.data.product
     }
     catch (err) {
@@ -21,9 +25,13 @@ const show = async (id) => {
     }
 }
 const create = async (formData)=> {
-  try{
-    const token = localStorage.getItem('token')
-    const response = await axios.post(BASE_URL, formData,{headers:{Authorization: `Bearer ${token}`}})
+  try {
+    const response = await axios.post(
+      BASE_URL, 
+      formData,
+      authHeaders()
+    )
+
     console.log(response.data)
     return response.data
   }catch(error){
@@ -32,7 +40,7 @@ const create = async (formData)=> {
 }
 const update = async (productId, formData) => {
   try {
-    const response = await axios.put(`${BASE_URL}/${productId}`, formData)
+    const response = await axios.put(`${BASE_URL}/${productId}`, formData, authHeaders())
     return response.data.product
   } catch (error) {
     console.log(error)
@@ -40,16 +48,28 @@ const update = async (productId, formData) => {
 }
 const deleteOne = async (productId) => {
   try{
-    const response = await axios.delete(`${BASE_URL}/${productId}`)
+    const response = await axios.delete(`${BASE_URL}/${productId}`, authHeaders())
     return response.data.product
   }catch(error){
     console.log(error)
   }
+}
+const sellersProucts = async () => {
+
+try {
+        const response = await axios.get(`${BASE_URL}/my-products`, authHeaders())
+        console.log(response)
+        return response.data.products
+    }
+    catch (err) {
+        console.log(err)
+    }
 }
 export {
     index,
     show,
     create,
     update,
-    deleteOne
+    deleteOne,
+    sellersProucts
 }
