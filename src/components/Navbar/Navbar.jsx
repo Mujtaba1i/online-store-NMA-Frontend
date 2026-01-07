@@ -48,7 +48,7 @@ function NavBar() {
         <button onClick={logout}>Sign-out</button>
         {user ?  user.role === 'admin' &&  <Link to='/admin-dashboard'>Admin Dashboard</Link> : <></>}
         {user ?  user.role === 'seller' &&  <Link to='/seller-dashboard'>Seller Dashboard</Link> : <></>}
-        {user ?  user.role === 'customer' &&  <Link to='/cart'>Number of items in cart: {user.cart.length} </Link> : <></>}
+        {user ?  user.role === 'customer' &&  <Link to='/cart'>Number of items in cart: {user.cartTotal} </Link> : <></>}
         </>
         :
         <>
