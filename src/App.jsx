@@ -12,13 +12,14 @@ import OrderList from './components/Order/OrderList/OrderList'
 import OrderDetails from './components/Order/OrderDetails/OrderDetails'
 import AdminDashboard from "./components/Dashboard/AdminDashboard/AdminDashboard"
 import SellerDashboard from "./components/Dashboard/SellerDashboard/SellerDashboard"
-import Cart from './components/Cart'
+import Cart from './components/Cart/Cart'
 import * as userService from './services/userService'
 
 function App() {
   const { user,setUser } = useContext(UserContext)
   
   async function fetchCart(){
+    if(!user) return
     const response = await userService.oneCustomer(user._id)
     const cartUser = response.data.oneUser
     setUser(cartUser)
