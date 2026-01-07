@@ -1,4 +1,5 @@
 import { createContext, useState } from "react"
+import * as userService from "../services/userService"
 
 const UserContext = createContext()
 
@@ -15,15 +16,17 @@ function getUserFromToken (){
 
 function UserProvider ({children}){
     const [user,setUser] = useState(getUserFromToken())
-    const handleAddToCart = (cartItem) => {
-            
+    const handleAddToCart = async (cartItem) => {
             const userCart = user.cart
-            console.log(userCart);
-            console.log(cartItem)
-            // take the cart item and send that to the back end
-            // need an service that adds the item to the cart
-            // once we get the success we can update the cart state
-            // call setcart(response.data.cart)
+            
+            const response = await userService.updateCustomerCart(user._id,cartItem)
+            if (response.data === 'ADDED TO CART'){
+                const updatedUserData = await userService.oneCustomer(user._id)
+                setUser({...user,cart:updatedUserData.data.oneUser.cart })
+            }
+            else{
+                console.log(Failed)
+            }
         }
     const value = {
         user,
