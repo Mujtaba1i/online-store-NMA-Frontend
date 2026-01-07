@@ -22,7 +22,7 @@ function UserProvider ({children}){
             const response = await userService.updateCustomerCart(user._id,cartItem)
             if (response.data === 'ADDED TO CART'){
                 const updatedUserData = await userService.oneCustomer(user._id)
-                setUser({...user,cart:updatedUserData.data.oneUser.cart })
+                setUser({...user,cart:updatedUserData.data.oneUser.cart, cartTotal:updatedUserData.data.oneUser.cartTotal })
             }
             else{
                 console.log(Failed)
