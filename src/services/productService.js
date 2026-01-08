@@ -3,14 +3,15 @@ import { authHeaders } from "./authService"
 const BASE_URL = `${import.meta.env.VITE_API_URL}/products`
 
 
-const index = async () => {
-    try {
-        const response = await axios.get(BASE_URL)
-        return response.data.products
-    }
-    catch (err) {
-        console.log(err)
-    }
+const index = async (query) => {
+  try {
+    const url = query ? `${BASE_URL}?name=${query}` : BASE_URL
+    const response = await axios.get(url)
+    // console.log(response.data)
+    return response.data.products
+  } catch (err) {
+    console.log(err)
+  }
 }
 const show = async (id) => {
     try {
@@ -34,7 +35,7 @@ const create = async (formData)=> {
 
     console.log(response.data)
     return response.data
-  }catch(error){
+  } catch (error) {
     console.log(error)
   }
 }

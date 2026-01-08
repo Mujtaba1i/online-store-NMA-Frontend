@@ -23,7 +23,7 @@ function NavBar() {
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(`searching for /products?q=${search}`)
-    navigate(`/products/${search}`)
+    navigate(`/?name=${search}`)
   }
 
   return (
