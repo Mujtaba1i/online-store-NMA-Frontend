@@ -35,7 +35,7 @@ const OrderList = () => {
             <ul>
               {order.products.map((item) => (
                 <li key={item.product?._id}>
-                  {item.product.name}: Qty: {item.quantity}
+                  {item.product?.name}: Qty: {item.quantity}
                 </li>
               ))}
             </ul>
