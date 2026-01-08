@@ -1,4 +1,5 @@
 import { createContext, useState } from "react"
+import * as userService from "../services/userService"
 
 const UserContext = createContext()
 
@@ -15,9 +16,20 @@ function getUserFromToken (){
 
 function UserProvider ({children}){
     const [user,setUser] = useState(getUserFromToken())
+    const handleAddToCart = async (cartItem) => {
+        if (!user) return
+
+        const response = await userService.updateCustomerCart(user._id,cartItem,'increment')
+
+        if (response.data === 'ADDED TO CART') {
+            const updatedUserData = await userService.oneCustomer(user._id)
+            setUser(updatedUserData.data.oneUser)
+        }
+    }
     const value = {
         user,
-        setUser
+        setUser,
+        handleAddToCart
     }
     return(
         <UserContext.Provider value={value}>

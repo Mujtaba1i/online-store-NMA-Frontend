@@ -42,21 +42,21 @@ function NavBar() {
       </form>
       {/*  */}
       <ul>
-        {user ? (
-          <>
-            <p>Welcome {user.username}!</p>
-            <button onClick={logout}>Sign-out</button>
-          </>
-        ) : (
-          <>
-            <li>
-              <Link to="/Sign-up">Sign-Up</Link>
-            </li>
-            <li>
-              <Link to="/Sign-in">Sign-In</Link>
-            </li>
-          </>
-        )}
+        {user ? 
+        <>
+        <p>Welcome {user.username}!</p> 
+        <button onClick={logout}>Sign-out</button>
+        {user ?  user.role === 'admin' &&  <Link to='/admin-dashboard'>Admin Dashboard</Link> : <></>}
+        {user ?  user.role === 'seller' &&  <Link to='/seller-dashboard'>Seller Dashboard</Link> : <></>}
+        {user ?  user.role === 'customer' &&  <Link to='/cart'>Number of items in cart: {user.cartTotal} </Link> : <></>}
+        </>
+        :
+        <>
+        <li><Link to='/Sign-up'>Sign-Up</Link></li>
+        <li><Link to='/Sign-in'>Sign-In</Link></li>
+        </>
+        }
+        
       </ul>
     </nav>
   )

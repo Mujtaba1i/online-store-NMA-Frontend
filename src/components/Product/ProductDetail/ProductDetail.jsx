@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import * as productService from "../../../services/productService"
 import { useParams, Link, useNavigate } from 'react-router'
+import { UserContext } from '../../../contexts/UserContext.jsx';
 
 function productDetail() {
     const [product, setProduct] = useState({})
     const { id } = useParams()
     const navigate = useNavigate()
+    const { user,setUser,handleAddToCart } = useContext(UserContext)
 
     useEffect(() => {
         const getOneProduct = async (id) => {
@@ -17,17 +19,40 @@ function productDetail() {
                 console.log(err)
             }
         }
-        if(id) getOneProduct(id)
+        if (id) getOneProduct(id)
     }, [id])
+
+    const handleDelete = async () => {
+        const deletedProduct = await productService.deleteOne(id)
+
+        if (deletedProduct) {
+            navigate('/')
+        } else {
+            console.log('something went wrong!')
+        }
+    }
+
+    if (!id) return <h1>Loading...</h1>
+
     return (
-       <>
-       <h1>Product Details</h1>
-       <h3>Product: {product.name}</h3>
-       <p>Description: {product.description}</p>
-       <p>Price: {product.price}</p>
-       <p>Stock: {product.stock}</p>
-       <img src={product.imageLink} alt="productImage" />
-       </>
+        <>
+            <h1>Product Details</h1>
+            <h3>Product: {product.name}</h3>
+            <p>Description: {product.description}</p>
+            <p>Price: {product.price}</p>
+            <p>Stock: {product.stock}</p>
+            <img src={product.imageLink} alt="productImage" />
+            <br />
+            {user === null ? <></> :(user.role === 'customer' && <button onClick={() => handleAddToCart(id)}>Add to cart</button>)}
+            <br />
+            {user === null ? <></> :((user.role === "admin" || product.user == user._id) && (<>
+            <Link to={`/products/${id}/edit`}>
+            <button>Edit</button>
+            </Link>
+            <br />
+            <button onClick={handleDelete}>Delete</button></>))}
+            
+        </>
     )
 }
 

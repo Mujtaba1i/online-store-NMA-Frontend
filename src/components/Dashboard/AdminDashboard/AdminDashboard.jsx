@@ -33,14 +33,12 @@ function Admin() {
             const body = {wantToBeSeller: false, role: 'seller'}
             const response = await userService.acceptSellerReq(_id, body)
             if (response === 'UPDATED'){
-                console.log('USER with id: '+ _id + ' HAS BEEN ACCEPTED AS SELLER');
                 getAllUsers()
             }
         }
         else{
             const response =await userService.deleteUser(_id)
             if (response === 'DELETED'){
-                console.log('USER with id: '+ _id + ' HAS BEEN DELETED');
                 getAllUsers()
             }
         }
@@ -73,11 +71,18 @@ function Admin() {
         </div>
         <div>
             <h1>Sellers</h1>
-            {sellers.map(oneUser => <div key={oneUser._id}>{oneUser.username}</div>)}
+            {sellers.map(oneUser => 
+            <div key={oneUser._id}>{oneUser.username}
+            <button onClick={()=>{handleButton(oneUser._id, false)}}>Delete</button>
+            </div>)}
         </div>
         <div>
             <h1>Customers</h1>
-            {customers.map(oneUser => <div key={oneUser._id}>{oneUser.username}</div>)}
+            {customers.map(oneUser => 
+            <div key={oneUser._id}>{oneUser.username}
+            <button onClick={()=>{handleButton(oneUser._id, false)}}>Delete</button>
+            </div>)}
+            
         </div>
     </>
   )

@@ -11,6 +11,28 @@ const customersIndex = async () => {
     }
 }
 
+const oneCustomer = async (id) =>{
+    try {
+        const response = await axios.get(`${BASE_URL}/${id}`)
+        return response
+    } catch (err) {
+        console.log(err)
+    }
+
+}
+
+const updateCustomerCart = async (customerId, productId, action) => {
+  try {
+    const response = await axios.put(
+      `${BASE_URL}/${customerId}/updateCart`,
+      { productId, action }
+    )
+    return response
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 const sellersReqIndex = async () => {
     try {
         const response = await axios.get(`${BASE_URL}/sellers-request`)
@@ -56,5 +78,7 @@ export {
     sellersReqIndex,
     sellersIndex,
     deleteUser,
-    acceptSellerReq
+    acceptSellerReq,
+    oneCustomer,
+    updateCustomerCart
 }
