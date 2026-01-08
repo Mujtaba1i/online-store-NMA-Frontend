@@ -33,7 +33,7 @@ function App() {
     <>
       <div>
         <NavBar />
-        <h1>MAMAMIA!! {user ? ', ' + user.role + ' ' + user.username : ''}</h1>
+        {/* <h1>MAMAMIA!! {user ? ', ' + user.role + ' ' + user.username : ''}</h1> */}
         <Routes>
           <Route path="/" element={<ProductList />} />
           <Route path="/Sign-up" element={<SignUpForm />} />
