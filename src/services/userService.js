@@ -21,13 +21,16 @@ const oneCustomer = async (id) =>{
 
 }
 
-const updateCustomerCart = async (customerId, productId) =>{
-    try {
-        const response = await axios.put(`${BASE_URL}/${customerId}/updateCart`, {productId})
-        return response
-    } catch (err) {
-        console.log(err)
-    }
+const updateCustomerCart = async (customerId, productId, action) => {
+  try {
+    const response = await axios.put(
+      `${BASE_URL}/${customerId}/updateCart`,
+      { productId, action }
+    )
+    return response
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 const sellersReqIndex = async () => {
