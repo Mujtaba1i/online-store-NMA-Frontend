@@ -13,6 +13,7 @@ import OrderDetails from './components/Order/OrderDetails/OrderDetails'
 import AdminDashboard from "./components/Dashboard/AdminDashboard/AdminDashboard"
 import SellerDashboard from "./components/Dashboard/SellerDashboard/SellerDashboard"
 import Cart from './components/Cart/Cart'
+import Footer from './components/Footer/Footer'
 import * as userService from './services/userService'
 
 function App() {
@@ -33,7 +34,6 @@ function App() {
     <>
       <div>
         <Navbar />
-        {/* <h1>MAMAMIA!! {user ? ', ' + user.role + ' ' + user.username : ''}</h1> */}
         <Routes>
           <Route path="/" element={<ProductList />} />
           <Route path="/Sign-up" element={<SignUpForm />} />
@@ -47,6 +47,7 @@ function App() {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/seller-dashboard" element={<SellerDashboard />} />
         </Routes>
+        <Footer />
       </div>
     </>
   )

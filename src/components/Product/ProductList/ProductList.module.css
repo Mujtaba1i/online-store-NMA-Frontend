@@ -1,4 +1,4 @@
-/* Modern Product List with Neon Accents */
+
 .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -133,7 +133,6 @@
     margin: 0;
     line-height: 1.4;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     overflow: hidden;
     transition: color 0.3s ease;
 }
@@ -144,7 +143,6 @@
     line-height: 1.5;
     margin: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     overflow: hidden;
     flex: 1;
 }
@@ -159,7 +157,6 @@
     gap: 0.5rem;
 }
 
-/* Price Styling */
 .priceContainer {
     display: flex;
     align-items: baseline;
@@ -192,7 +189,6 @@
     opacity: 0.8;
 }
 
-/* Stock Badge */
 .stockBadge {
     padding: 0.5rem 1rem;
     border-radius: 10px;
@@ -246,7 +242,6 @@
     box-shadow: 0 0 10px #f59e0b;
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
     .container {
         padding: 2rem 1.25rem;
@@ -304,7 +299,6 @@
     }
 }
 
-/* Loading Animation */
 @keyframes shimmer {
     0% {
         background-position: -200% center;
@@ -323,4 +317,3 @@
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
 }
-

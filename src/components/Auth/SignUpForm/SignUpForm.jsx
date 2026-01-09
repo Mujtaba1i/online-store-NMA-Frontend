@@ -1,18 +1,19 @@
 import { useContext, useState } from "react"
 import { signUp } from "../../../services/authService";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { UserContext } from "../../../contexts/UserContext";
+import styles from './SignUpForm.module.css';
 
 function SignUpForm() {
     const navigate = useNavigate()
     const {setUser} = useContext(UserContext)
 
     const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    confirmPassword: '',
-    wantToBeSeller:false
-  })
+        username: '',
+        password: '',
+        confirmPassword: '',
+        wantToBeSeller: false
+    })
 
     const { username, password, confirmPassword, wantToBeSeller } = formData;
     
@@ -30,9 +31,8 @@ function SignUpForm() {
             navigate('/')
         }
         else if (response === null){
-         navigate('/')   
+            navigate('/')   
         }
-            
         else{
             console.log('Ran into an error');
             setFormData({
@@ -42,33 +42,107 @@ function SignUpForm() {
                 wantToBeSeller: false
             })
         }
-        
     }
 
     const isFormInvalid = () => !(username && password && password === confirmPassword)
 
-  return (
-    <div>
-        <h1>Signup</h1>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="username">Username: </label>
-            <input name="username" id="username" type="text" onChange={handleChange} value={username}/><br /><br />
-            
-            <label htmlFor="password">password: </label>
-            <input name="password" id="password" type="password" onChange={handleChange} value={password}/><br /><br />
+    return (
+        <div className={styles.container}>
+            <div className={styles.formWrapper}>
+                <h1 className={styles.title}>Create Account</h1>
+                
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="username" className={styles.label}>
+                            Username
+                        </label>
+                        <input 
+                            name="username" 
+                            id="username" 
+                            type="text" 
+                            onChange={handleChange} 
+                            value={username}
+                            placeholder="Choose a username"
+                            className={styles.input}
+                            required
+                        />
+                    </div>
+                    
+                    <div className={styles.formGroup}>
+                        <label htmlFor="password" className={styles.label}>
+                            Password
+                        </label>
+                        <input 
+                            name="password" 
+                            id="password" 
+                            type="password" 
+                            onChange={handleChange} 
+                            value={password}
+                            placeholder="Create a password"
+                            className={styles.input}
+                            required
+                        />
+                    </div>
 
-            <label htmlFor="confirm-password">confirm password: </label>
-            <input name="confirmPassword" id="confirm-password" type="password" onChange={handleChange} value={confirmPassword}/><br /><br />
-            
-            <label htmlFor="wantToBeSeller">Want to be Signup as Store?  </label>
-            <input name="wantToBeSeller" id="wantToBeSeller" type="checkbox" onChange={handleChange} checked={wantToBeSeller}/><br /><br />
-            
-            <button disabled={isFormInvalid()}>Sign Up</button><br /><br />
-            <button onClick={() => navigate('/')}>Cancel</button>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="confirm-password" className={styles.label}>
+                            Confirm Password
+                        </label>
+                        <input 
+                            name="confirmPassword" 
+                            id="confirm-password" 
+                            type="password" 
+                            onChange={handleChange} 
+                            value={confirmPassword}
+                            placeholder="Confirm your password"
+                            className={styles.input}
+                            required
+                        />
+                    </div>
+                    
+                    <div className={styles.checkboxGroup}>
+                        <input 
+                            name="wantToBeSeller" 
+                            id="wantToBeSeller" 
+                            type="checkbox" 
+                            onChange={handleChange} 
+                            checked={wantToBeSeller}
+                            className={styles.checkbox}
+                        />
+                        <label htmlFor="wantToBeSeller" className={styles.checkboxLabel}>
+                            I want to sign up as a store
+                        </label>
+                    </div>
+                    
+                    <div className={styles.buttonGroup}>
+                        <button 
+                            type="submit" 
+                            disabled={isFormInvalid()} 
+                            className={styles.submitButton}
+                        >
+                            Sign Up
+                        </button>
+                        <button 
+                            type="button"
+                            onClick={() => navigate('/')} 
+                            className={styles.cancelButton}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
 
-        </form>
-    </div>
-  )
+                <div className={styles.footer}>
+                    <p className={styles.footerText}>
+                        Already have an account?{' '}
+                        <Link to="/sign-in" className={styles.footerLink}>
+                            Sign in
+                        </Link>
+                    </p>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default SignUpForm
