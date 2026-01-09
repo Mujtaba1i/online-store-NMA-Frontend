@@ -1,23 +1,45 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import * as productService from "../../../services/productService"
-import { useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams , Navigate } from 'react-router'
+import { UserContext } from "../../../contexts/UserContext"
 
 function EditProductForm() {
     const navigate = useNavigate()
     const { id } = useParams()
-    const [formState, setFormState] = useState({})
+    const [formState, setFormState] = useState({
+        name:'',
+        description: '',
+        price:0,
+        stock:0,
+        imageLink:''
+    })
     const [message, setMessage] =useState(" ")
+    const {user} = useContext(UserContext)
 
-    useEffect(
-        () => {
-            const getOneProduct = async (id) => {
-                const product = await productService.show(id)
-                setFormState(product)
-            }
+    useEffect(() => {
+    const getOneProduct = async () => {
+        try {
+        const product = await productService.show(id)
 
-            if (id) getOneProduct(id)
-        }, [id]
-    )
+        if (!user || user.role !== 'seller') {
+            navigate('/')
+            return
+        }
+
+        if (product.user.toString() !== user._id) {
+            navigate('/')
+            return
+        }
+
+        setFormState(product)
+        } catch (err) {
+            console.log(err)
+            navigate('/')
+        }
+    }
+
+    if (id && user) getOneProduct()
+    }, [id, user, navigate])
 
     if (!id) return <h1>Loading...</h1>
     if (!formState) return <h1>Loading..</h1>
@@ -45,6 +67,11 @@ function EditProductForm() {
             setMessage("Something went wrong")
         }
     }
+
+    if (user === null || user?.role === 'admin' || user?.role === 'customer' ) {
+        return <Navigate to='/'/>
+    }
+
     return (
         <>
             <h1>Edit {formState.name}</h1>

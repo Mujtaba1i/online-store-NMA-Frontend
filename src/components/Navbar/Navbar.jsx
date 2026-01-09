@@ -3,7 +3,7 @@ import { UserContext } from '../../contexts/UserContext'
 import { useContext, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import styles from './NavBar.module.css'
+import styles from './Navbar.module.css'
 
 function NavBar() {
   const { user, setUser } = useContext(UserContext)
@@ -78,15 +78,17 @@ function NavBar() {
                 </Link>
               )}
               
-              {user.role === 'customer' && (
+              {user.role === 'customer' && (<>
                 <Link to='/cart' className={styles.cartLink}>
                   <FontAwesomeIcon icon={faCartShopping} style={{color: "#df1144",}} />
                   <div className={styles.cartIcon}>
-                                        {user.cartTotal > 0 && (
-                      <span className={styles.cartCount}>{user.cartTotal}</span>
-                    )}
+                      {user.cartTotal > 0 && (<span className={styles.cartCount}>{user.cartTotal}</span>)}
                   </div>
                 </Link>
+                <Link to='/orders' className={styles.dashboardLink}>
+                  Orders
+                </Link>
+                </>
               )}
             </div>
           ) : (

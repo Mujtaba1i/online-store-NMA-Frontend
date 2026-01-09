@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import * as productService from "../../../services/productService"
-import { useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams, Navigate } from 'react-router'
+import { UserContext } from "../../../contexts/UserContext"
 
 const ProductForm = () => {
     const navigate = useNavigate()
+    const {user} = useContext(UserContext)
     const [formState, setFormState] = useState({
         name:'',
         description: '',
@@ -36,6 +38,11 @@ const ProductForm = () => {
             setMessage("Something went wrong")
         }
     }
+
+    if (user === null || user?.role === 'admin' || user?.role === 'customer' ) {
+        return <Navigate to='/'/>
+    }
+
     return (
         <>
             <h1>Create new Product</h1>

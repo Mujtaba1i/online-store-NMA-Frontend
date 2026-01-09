@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react'
 import { Route, Routes, Link } from 'react-router'
 import { UserContext } from './contexts/UserContext'
-import NavBar from './components/NavBar/NavBar'
+import Navbar from './components/Navbar/Navbar'
 import SignUpForm from './components/Auth/SignUpForm/SignUpForm'
 import SignInForm from './components/Auth/SignInForm/SignInForm'
 import ProductList from './components/Product/ProductList/ProductList'
@@ -32,7 +32,7 @@ function App() {
   return (
     <>
       <div>
-        <NavBar />
+        <Navbar />
         {/* <h1>MAMAMIA!! {user ? ', ' + user.role + ' ' + user.username : ''}</h1> */}
         <Routes>
           <Route path="/" element={<ProductList />} />

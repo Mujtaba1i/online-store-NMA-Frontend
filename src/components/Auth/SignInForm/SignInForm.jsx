@@ -1,11 +1,12 @@
 import { useContext, useState } from "react"
 import { signIn } from "../../../services/authService";
-import { useNavigate } from "react-router";
+import { useNavigate, Navigate } from "react-router";
 import { UserContext } from "../../../contexts/UserContext";
 
 function SignInForm() {
     const navigate = useNavigate()
     const {setUser} = useContext(UserContext)
+    const { user } = useContext(UserContext)
 
     const [formData, setFormData] = useState({
     username: '',
@@ -34,6 +35,10 @@ function SignInForm() {
             })
         }
         
+    }
+
+    if ( user?.role === 'admin' || user?.role === 'seller' || user?.role === 'customer') {
+      return <Navigate to='/'/>
     }
 
   return (

@@ -68,11 +68,6 @@ const ProductList = () => {
                                             <h2 className={styles.productName}>
                                                 {oneProduct.name}
                                             </h2>
-                                            {oneProduct.description && (
-                                                <p className={styles.productDescription}>
-                                                    {oneProduct.description}
-                                                </p>
-                                            )}
                                             <div className={styles.productFooter}>
                                                 <div className={styles.priceContainer}>
                                                     <span className={styles.priceDollar}>BHD</span>

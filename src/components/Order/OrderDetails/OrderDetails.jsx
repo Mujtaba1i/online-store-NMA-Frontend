@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router'
 import * as orderService from '../../../services/orderService.js'
-import { useParams } from 'react-router'
+import { useParams, Navigate } from 'react-router'
+import { UserContext } from "../../../contexts/UserContext"
 
 const OrderDetails = () => {
   const { id } = useParams()
+  const {user} = useContext(UserContext)
 
   const [order, setOrder] = useState({})
   useEffect(() => {
@@ -18,6 +20,10 @@ const OrderDetails = () => {
     }
     getOneOrder()
   }, [])
+
+    if (user === null || user?.role === 'admin' || user?.role === 'seller' ) {
+      return <Navigate to='/'/>
+    }
 
   return (
     <>
