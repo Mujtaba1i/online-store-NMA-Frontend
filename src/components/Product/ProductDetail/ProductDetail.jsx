@@ -44,7 +44,7 @@ function ProductDetail() {
     }
 
     const formatPrice = (price) => {
-        const priceStr = (price || 0).toFixed(2)
+        const priceStr = (price || 0).toFixed(3)
         const [whole, cents] = priceStr.split('.')
         return { whole, cents }
     }
@@ -60,7 +60,6 @@ function ProductDetail() {
         <div className={styles.container}>
             <div className={styles.breadcrumb}>
                 <Link to="/">Home</Link>
-                <span>›</span>
                 <span>{product.name}</span>
             </div>
 
@@ -80,27 +79,23 @@ function ProductDetail() {
                         </div>
                     </div>
 
-                    {/* Details Section */}
                     <div className={styles.detailsSection}>
                         <h1 className={styles.productTitle}>{product.name}</h1>
 
-                        {/* Price Section */}
                         <div className={styles.priceSection}>
                             <div className={styles.priceLabel}>Price</div>
                             <div className={styles.priceContainer}>
-                                <span className={styles.priceDollar}>$</span>
+                                <span className={styles.priceDollar}>BHD</span>
                                 <span className={styles.priceWhole}>{price.whole}</span>
                                 <span className={styles.priceCents}>{price.cents}</span>
                             </div>
 
-                            {/* Stock Info */}
                             <div className={`${styles.stockInfo} ${stockStatus.class}`}>
                                 <div className={stockStatus.dot}></div>
                                 <span className={styles.stockText}>{stockStatus.text}</span>
                             </div>
                         </div>
 
-                        {/* Description */}
                         {product.description && (
                             <div className={styles.descriptionSection}>
                                 <h2 className={styles.descriptionTitle}>About this item</h2>
@@ -108,7 +103,6 @@ function ProductDetail() {
                             </div>
                         )}
 
-                        {/* Actions */}
                         <div className={styles.actionsSection}>
                             {user && user.role === 'customer' && (
                                 <button 

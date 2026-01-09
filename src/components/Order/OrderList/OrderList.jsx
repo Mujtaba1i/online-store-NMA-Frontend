@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react'
-import { Link } from 'react-router'
+import { Link, Navigate } from 'react-router'
 import * as orderService from '../../../services/orderService.js'
 import { UserContext } from '../../../contexts/UserContext'
 
@@ -20,6 +20,10 @@ const OrderList = () => {
     }
     getAllOrders()
   }, [user])
+
+    if (user === null || user?.role === 'admin' || user?.role === 'seller' ) {
+      return <Navigate to='/'/>
+    }
 
   return (
     <>
