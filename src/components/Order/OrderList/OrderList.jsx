@@ -45,9 +45,6 @@ const OrderList = () => {
                 <div className={styles.emptyState}>
                     <div className={styles.emptyIcon}>🛒</div>
                     <p className={styles.emptyText}>No orders found</p>
-                    <p className={styles.emptyHint}>
-                        Start shopping to see your orders here
-                    </p>
                 </div>
             ) : (
                 <ul className={styles.orderList}>
