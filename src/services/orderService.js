@@ -12,8 +12,12 @@ const index = async (userId) => {
 }
 const show = async (id) => {
   try {
-    const response = await axios.get(`${BASE_URL}/${id}`)
-    return response.data.orders
+    const response = await axios.get(`${BASE_URL}/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    return response.data.oneOrder
   } catch (error) {
     console.error(error)
   }
@@ -24,9 +28,40 @@ const createOrdersFromCart = async (userId) => {
   return axios.post(`${BASE_URL}/checkout/${userId}`,{},{headers: {Authorization: `Bearer ${token}`}})
 }
 
+const updateStatus = async (orderId, productId, status) => {
+  try {
+    const res = await axios.patch(`${BASE_URL}/orders/${orderId}/status`, { productId, status },
+      {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      }
+    )
+    
+    return res.data
+  } catch (err) {
+    throw new Error(err.response?.data?.message || 'Failed to update order status');
+  }
+}
+
+const getSellerOrders = async () => {
+  try {
+    const res = await axios.get(`${BASE_URL}/seller/orders`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    return res.data.orders;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
 export { 
   index, 
   show,
-  createOrdersFromCart 
+  createOrdersFromCart,
+  updateStatus,
+  getSellerOrders
 }
