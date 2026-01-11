@@ -24,16 +24,6 @@ function EditProductForm() {
                 setLoading(true)
                 const product = await productService.show(id)
 
-                if (!user || user.role !== 'seller') {
-                    navigate('/')
-                    return
-                }
-
-                if (product.user.toString() !== user._id) {
-                    navigate('/')
-                    return
-                }
-
                 setFormState(product)
             } catch (err) {
                 console.log(err)
@@ -99,7 +89,7 @@ function EditProductForm() {
         )
     }
 
-    if (user === null || user?.role === 'admin' || user?.role === 'customer') {
+    if (user === null  || user?.role === 'customer') {
         return <Navigate to='/' />
     }
 

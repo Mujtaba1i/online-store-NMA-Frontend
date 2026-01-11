@@ -58,7 +58,6 @@ const sellersProucts = async () => {
 
 try {
         const response = await axios.get(`${BASE_URL}/my-products`, authHeaders())
-        console.log(response)
         return response.data.products
     }
     catch (err) {
