@@ -64,10 +64,16 @@ The application includes secure authentication with separate dashboards for sell
 
 - MongoBD
 
+- JavaScript
+
 ## Next Step:
 
 - Improve interface
 
 - Add order tracking
+
+- Add dark mode option
+
+- Add google Authentication 
 
 
