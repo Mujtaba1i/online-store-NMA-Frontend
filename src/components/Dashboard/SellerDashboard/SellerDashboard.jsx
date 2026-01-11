@@ -107,7 +107,7 @@ function SellerDashboard() {
                   </div>
                   <div className={styles.orderDetails}>
                     <p className={styles.orderCustomer}>
-                      Customer: {order.user.username}
+                      Customer: {order.user?.username}
                     </p>
                     <p className={styles.orderProducts}>
                       {sellerProducts.length} product{sellerProducts.length !== 1 ? 's' : ''} from your store
